@@ -1,0 +1,34 @@
+{
+  "name": "js-starter",
+  "version": "1.0.0",
+  "description": "JS project skeleton",
+  "keywords": [
+    "js",
+    "project",
+    "skeleton",
+    "mkit"
+  ],
+  "scripts": {
+    "format": "prettier --check \"src\"",
+    "lint": "eslint --fix \"src\"",
+    "release": "standard-version"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "standard-version": "^8.0.0"
+  },
+  "author": "MK IT Ltd. <hi@mkit.io>",
+  "homepage": "https://github.com/MK-IT/js-starter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MK-IT/js-starter"
+  },
+  "bugs": {
+    "url": "https://github.com/MK-IT/js-starter/issues"
+  },
+  "license": "MIT"
+}
