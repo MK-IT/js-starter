@@ -1,11 +1,11 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 // FIXME: Webpack will be used only for production build; development would happen inside the storybook
-// TODO: @babel/cli might not be needed since we won't use Babel directly; webpack will use babel internally
-// TODO: how to source maps? https://webpack.js.org/guides/author-libraries/#base-configuration-with-source-map
-// TODO: how to exclude externals such as styled components? https://webpack.js.org/guides/author-libraries/#externalize-lodash
 // TODO: might need a plugin to include generated CSS https://webpack.js.org/plugins/mini-css-extract-plugin
 // TODO: production guide https://webpack.js.org/guides/production/
+// TODO: we don't need styled components bundled with our lib but either just the generated components with styles OR as peer dependency
+// TODO: bundle size
 
 module.exports = {
   mode: 'production',
@@ -26,5 +26,7 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  externals: [nodeExternals()],
+  devtool: 'source-map'
 };

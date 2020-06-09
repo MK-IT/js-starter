@@ -29,7 +29,8 @@
     "react-dom": "^16.13.1",
     "standard-version": "^8.0.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
   },
   "author": "MK IT Ltd. <hi@mkit.io>",
   "homepage": "https://github.com/MK-IT/js-starter",
