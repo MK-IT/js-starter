@@ -34,6 +34,10 @@
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2"
   },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
   "author": "MK IT Ltd. <hi@mkit.io>",
   "homepage": "https://github.com/MK-IT/js-starter",
   "repository": {
