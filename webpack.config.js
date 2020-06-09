@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // FIXME: Webpack will be used only for production build; development would happen inside the storybook
 // TODO: might need a plugin to include generated CSS https://webpack.js.org/plugins/mini-css-extract-plugin
@@ -27,6 +28,7 @@ module.exports = {
       }
     ]
   },
+  plugins: [new CleanWebpackPlugin()],
   externals: [nodeExternals()],
   devtool: 'source-map'
 };
