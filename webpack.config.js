@@ -8,13 +8,16 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // TODO: we don't need styled components bundled with our lib but either just the generated components with styles OR as peer dependency
 // TODO: bundle size
 
+const BUNDLE_FILENAME = 'js-template.bundle.js';
+const LIB_NAME = 'jsTemplate';
+
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js-template.js',
-    library: 'jsTemplate',
+    filename: BUNDLE_FILENAME,
+    library: LIB_NAME,
     libraryTarget: 'umd'
   },
   module: {
