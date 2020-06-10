@@ -4,11 +4,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
-// FIXME: Webpack will be used only for production build; development would happen inside the storybook
-// TODO: might need a plugin to include generated CSS https://webpack.js.org/plugins/mini-css-extract-plugin
-// TODO: production guide https://webpack.js.org/guides/production/
-// TODO: we don't need styled components bundled with our lib but either just the generated components with styles OR as peer dependency
-
 const FILENAME = 'js-template';
 const LIB_NAME = 'jsTemplate';
 
@@ -23,15 +18,22 @@ module.exports = {
   },
   module: {
     rules: [
+      // run all JS through Babel
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
+      },
+      // run all CSS imports
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
+  // Webpack utility plugins
   plugins: [
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin({
@@ -40,6 +42,8 @@ module.exports = {
       openAnalyzer: false
     })
   ],
+  // Exclude `node_modules` from our bundle
   externals: [nodeExternals()],
+  // Generate sourcemaps
   devtool: 'source-map'
 };

@@ -1,0 +1,9 @@
+.root {
+  background: rebeccapurple;
+  color: white;
+}
+
+.inverse {
+  background: white;
+  color: rebeccapurple;
+}
