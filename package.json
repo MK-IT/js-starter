@@ -8,14 +8,19 @@
     "skeleton",
     "mkit"
   ],
-  "main": "dist/js-starter.js",
+  "main": "dist/js-starter.bundle.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "format": "prettier --check \"src\"",
     "lint": "eslint --fix \"src\"",
     "build": "webpack",
     "release": "standard-version"
   },
-  "dependencies": {},
+  "dependencies": {
+    "clsx": "^1.1.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
@@ -38,7 +43,8 @@
   },
   "peerDependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "clsx": "^1.1.1"
   },
   "author": "MK IT Ltd. <hi@mkit.io>",
   "homepage": "https://github.com/MK-IT/js-starter",

@@ -1,7 +1,12 @@
 // Place your settings in this file to overwrite default and user settings.
 {
   // Code spellcheck to ignore project-specific words
-  "cSpell.words": ["mkit", "commitlint", "roadmap"],
+  "cSpell.words": [
+    "clsx",
+    "commitlint",
+    "mkit",
+    "roadmap"
+  ],
 
   // Fix all auto-fixable issues reported by ESLint
   "editor.codeActionsOnSave": {
