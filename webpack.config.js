@@ -1,11 +1,16 @@
+const package = require('./package.json');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
 
-const FILENAME = 'js-template';
-const LIB_NAME = 'jsTemplate';
+const camelCase = (str) =>
+  str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+
+// Generate names automatically from `package.json`
+const FILENAME = package.name;
+const LIB_NAME = camelCase(package.name);
 
 module.exports = {
   mode: 'production',
