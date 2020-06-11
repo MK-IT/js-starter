@@ -50,7 +50,7 @@ module.exports = {
    *******************************************************/
   module: {
     rules: [
-      // run all JS through Babel
+      // run all JS through TS
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
