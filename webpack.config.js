@@ -2,8 +2,8 @@ const package = require('./package.json');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { TypedCssModulesPlugin } = require('typed-css-modules-webpack-plugin');
 
 const camelCase = (str) =>
   str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
@@ -19,7 +19,7 @@ module.exports = {
    * Build configuration
    *******************************************************/
   mode: 'production',
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: `${FILENAME}.bundle.js`,
@@ -34,12 +34,16 @@ module.exports = {
       analyzerMode: 'static',
       reportFilename: `${FILENAME}.webpack-bundle-analyzer.html`,
       openAnalyzer: false
+    }),
+    // Generate typing declarations for all CSS files under `src/` directory.
+    new TypedCssModulesPlugin({
+      globPattern: 'src/**/*.css'
     })
   ],
   // Exclude `node_modules` from our bundle
   externals: [nodeExternals()],
   // Generate sourcemaps
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   /*******************************************************
    * Processing
@@ -48,11 +52,9 @@ module.exports = {
     rules: [
       // run all JS through Babel
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       // CSS like `import 'styles.css'`
       {
@@ -76,5 +78,8 @@ module.exports = {
         include: /\.module\.css$/
       }
     ]
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js']
   }
 };
