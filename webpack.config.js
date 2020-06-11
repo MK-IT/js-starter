@@ -8,11 +8,16 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const camelCase = (str) =>
   str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
 
-// Generate names automatically from `package.json`
+/*******************************************************
+ * Configuration variables
+ *******************************************************/
 const FILENAME = package.name;
 const LIB_NAME = camelCase(package.name);
 
 module.exports = {
+  /*******************************************************
+   * Build configuration
+   *******************************************************/
   mode: 'production',
   entry: './src/index.js',
   output: {
@@ -21,6 +26,24 @@ module.exports = {
     library: LIB_NAME,
     libraryTarget: 'umd'
   },
+  plugins: [
+    // clean dist/
+    new CleanWebpackPlugin(),
+    // bundle analyzer
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: `${FILENAME}.webpack-bundle-analyzer.html`,
+      openAnalyzer: false
+    })
+  ],
+  // Exclude `node_modules` from our bundle
+  externals: [nodeExternals()],
+  // Generate sourcemaps
+  devtool: 'source-map',
+
+  /*******************************************************
+   * Processing
+   *******************************************************/
   module: {
     rules: [
       // run all JS through Babel
@@ -31,24 +54,27 @@ module.exports = {
           loader: 'babel-loader'
         }
       },
-      // run all CSS imports
+      // CSS like `import 'styles.css'`
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        exclude: /\.module\.css$/
+      },
+      // CSS modules like `import styles from 'MyComponent.module.css'... className={styles.myStyle}`
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: true
+            }
+          }
+        ],
+        include: /\.module\.css$/
       }
     ]
-  },
-  // Webpack utility plugins
-  plugins: [
-    new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: `${FILENAME}.webpack-bundle-analyzer.html`,
-      openAnalyzer: false
-    })
-  ],
-  // Exclude `node_modules` from our bundle
-  externals: [nodeExternals()],
-  // Generate sourcemaps
-  devtool: 'source-map'
+  }
 };
