@@ -10,7 +10,8 @@
   ],
   "main": "dist/js-starter.bundle.js",
   "files": [
-    "dist"
+    "dist",
+    "!dist/js-starter.webpack-bundle-analyzer.html"
   ],
   "scripts": {
     "format": "prettier --check \"src\"",
