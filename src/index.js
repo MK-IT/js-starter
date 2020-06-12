@@ -1,5 +1,1 @@
-const foo =
-  (reallyLongArg,
-  omgSoManyParameters,
-  IShouldRefactorThis,
-  isThereSeriouslyAnotherOne);
+// index.js
