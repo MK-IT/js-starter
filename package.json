@@ -19,7 +19,7 @@
     "@commitlint/config-conventional": "^8.3.4",
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
-    "standard-version": "^8.0.0"
+    "standard-version": "^8.0.1"
   },
   "author": "MK IT Ltd. <hi@mkit.io>",
   "homepage": "https://github.com/MK-IT/js-starter",
